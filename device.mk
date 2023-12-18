@@ -275,6 +275,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/init/fstab.default:$(TARGET_COPY_OUT_VENDOR_
 PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.default \
+    fstab.zram \
     init.class_main.sh \
     init.kernel.post_boot-lahaina.sh \
     init.kernel.post_boot-shima.sh \
