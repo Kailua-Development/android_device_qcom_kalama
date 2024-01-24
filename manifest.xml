@@ -772,4 +772,24 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <instance>sxrhalservice</instance>
         </interface>
     </hal>
+    <!-- Keymaster HAL service -->
+    <hal format="hidl">
+        <name>android.hardware.keymaster</name>
+        <transport>hwbinder</transport>
+        <version>4.1</version>
+        <interface>
+            <name>IKeymasterDevice</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <!-- Gatekeeper HAL service -->
+    <hal format="hidl">
+        <name>android.hardware.gatekeeper</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IGatekeeper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </manifest>
