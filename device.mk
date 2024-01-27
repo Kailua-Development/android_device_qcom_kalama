@@ -265,6 +265,7 @@ PRODUCT_PACKAGES += \
     charger_fw_fstab.qti \
     fstab.default \
     init.class_main.sh \
+    init.kernel.post_boot-lahaina.sh \
     init.lahaina.perf.rc \
     init.qcom.early_boot.sh \
     init.qcom.rc \
