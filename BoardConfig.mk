@@ -64,6 +64,10 @@ BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 # FSConfig
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
+# GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
+LOC_HIDL_VERSION := 4.0
+
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
