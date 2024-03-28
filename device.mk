@@ -123,6 +123,10 @@ PRODUCT_PACKAGES += \
     libvolumelistener \
     sound_trigger.primary.lahaina
 
+# Authsecret
+PRODUCT_PACKAGES += \
+    android.hardware.authsecret@1.0.vendor
+
 # Boot Control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
