@@ -275,6 +275,8 @@ PRODUCT_PACKAGES += \
     fstab.default \
     init.class_main.sh \
     init.kernel.post_boot-lahaina.sh \
+    init.kernel.post_boot-shima.sh \
+    init.kernel.post_boot-yupik.sh \
     init.lahaina.perf.rc \
     init.qcom.early_boot.sh \
     init.qcom.rc \
