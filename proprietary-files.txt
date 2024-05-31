@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise, are
-## from LA.UM.9.14.1.r1-13000-QCM6490.QSSI13.0 (vendor) and LA.QSSI.14.0.r1-13500-qssi.0 (system)
+## from LA.UM.9.14.1.r1-13000-QCM6490.QSSI13.0 (vendor) and LA.QSSI.14.0.r1-14100-qssi.0 (system)
 
 # ACDBs
 vendor/etc/acdbdata/CDP/CDP_Bluetooth_cal.acdb
@@ -883,7 +883,6 @@ system_ext/app/ImsRcsService/ImsRcsService.apk
 system_ext/app/QtiTelephony/QtiTelephony.apk
 system_ext/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
 system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml
-system_ext/etc/sysconfig/qti_telephony_system_packages_config.xml
 system_ext/etc/sysconfig/qti_whitelist_system_ext.xml
 system_ext/framework/vendor.qti.ims.connection-V1.0-java.jar
 system_ext/framework/vendor.qti.ims.factory-V2.0-java.jar
@@ -1222,8 +1221,6 @@ vendor/bin/init.qti.qcv.sh
 vendor/etc/init/init.qti.qcv.rc
 
 # QMI
-system/etc/permissions/privapp-permissions-qti.xml
-system/etc/sysconfig/qti_whitelist.xml
 vendor/bin/irsc_util
 vendor/bin/qmipriod
 vendor/etc/init/qmipriod.rc
