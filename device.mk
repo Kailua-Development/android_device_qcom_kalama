@@ -599,5 +599,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     WfdCommon
 
+# WiFi firmware symlinks
+PRODUCT_PACKAGES += \
+    firmware_WCNSS_qcom_cfg.ini_symlink \
+    firmware_WCNSS_qcom_cfg.ini_qca6390_symlink \
+    firmware_WCNSS_qcom_cfg.ini_qca6750_symlink
+
 # Inherit the proprietary files
 $(call inherit-product, vendor/qcom/lahaina/lahaina-vendor.mk)
