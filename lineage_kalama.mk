@@ -15,13 +15,13 @@ $(call inherit-product, device/qcom/lahaina/device.mk)
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 PRODUCT_BRAND := qti
-PRODUCT_DEVICE := lahaina
+PRODUCT_DEVICE := kalama
 PRODUCT_MANUFACTURER := QUALCOMM
-PRODUCT_MODEL := Lahaina for arm64
-PRODUCT_NAME := lineage_lahaina
+PRODUCT_MODEL := Kalama for arm64
+PRODUCT_NAME := lineage_kalama
 
-PRODUCT_SYSTEM_NAME := lahaina
-PRODUCT_SYSTEM_DEVICE := lahaina
+PRODUCT_SYSTEM_NAME := kalama
+PRODUCT_SYSTEM_DEVICE := kalama
 
 PRODUCT_GMS_CLIENTID_BASE := android-qualcomm
 

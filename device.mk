@@ -606,4 +606,4 @@ PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_qca6750_symlink
 
 # Inherit the proprietary files
-$(call inherit-product, vendor/qcom/lahaina/lahaina-vendor.mk)
+$(call inherit-product, vendor/qcom/kalama/kalama-vendor.mk)
