@@ -8,7 +8,7 @@
 
 set -e
 
-DEVICE=lahaina
+DEVICE=kalama
 VENDOR=qcom
 
 # Load extract_utils and do some sanity checks

@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_lahaina.mk
+    $(LOCAL_DIR)/lineage_kalama.mk

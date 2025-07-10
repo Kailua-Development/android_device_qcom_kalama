@@ -6,7 +6,7 @@
 
 BOARD_VENDOR := qcom
 
-DEVICE_PATH := device/qcom/lahaina
+DEVICE_PATH := device/qcom/kalama
 
 # A/B
 AB_OTA_UPDATER := true
@@ -54,7 +54,7 @@ BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := lahaina
+TARGET_BOOTLOADER_BOARD_NAME := kalama
 TARGET_NO_BOOTLOADER := true
 
 # Build
@@ -219,7 +219,7 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_BOARD_PLATFORM := lahaina
+TARGET_BOARD_PLATFORM := kalama
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/configs/props/odm.prop
@@ -296,4 +296,4 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
-include vendor/qcom/lahaina/BoardConfigVendor.mk
+include vendor/qcom/kalama/BoardConfigVendor.mk
