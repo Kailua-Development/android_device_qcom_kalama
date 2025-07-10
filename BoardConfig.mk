@@ -81,115 +81,58 @@ DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/vintf/manifest.xml
 DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 
 # Kernel
-BOARD_BOOT_HEADER_VERSION := 3
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := \
+BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
-    lpm_levels.sleep_disabled=1 \
-    msm_rtb.filter=0x237 \
-    service_locator.enable=1 \
-    androidboot.usbcontroller=a600000.dwc3 \
-    swiotlb=0 \
-    loop.max_part=7 \
-    cgroup.memory=nokmem,nosocket \
-    pcie_ports=compat loop.max_part=7 \
-    iptable_raw.raw_before_defrag=1 \
-    ip6table_raw.raw_before_defrag=1
-BOARD_KERNEL_IMAGE_NAME := Image
+    androidboot.memcg=1 \
+    androidboot.usbcontroller=a600000.dwc3
+
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
-BOARD_RAMDISK_OFFSET := 0x02000000
-BOARD_RAMDISK_USE_LZ4 := true
-BOARD_KERNEL_SEPARATED_DTBO := true
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-TARGET_KERNEL_SOURCE := kernel/qcom/lahaina
-TARGET_KERNEL_CONFIG := vendor/lahaina-qgki_defconfig vendor/debugfs.config
-TARGET_KERNEL_NO_GCC := true
+BOARD_KERNEL_IMAGE_NAME := Image
+TARGET_KERNEL_SOURCE := kernel/qcom/sm8550
+TARGET_KERNEL_CONFIG := \
+    gki_defconfig \
+    vendor/kalama_GKI.config \
+    vendor/debugfs.config
 
 # Kernel modules
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/configs/kernel/modules.blocklist
-BOARD_VENDOR_KERNEL_MODULES_LOAD := \
-    adsp_loader_dlkm.ko \
-    apr_dlkm.ko \
-    bolero_cdc_dlkm.ko \
-    bt_fm_slim.ko \
-    btpower.ko \
-    camera.ko \
-    e4000.ko \
-    fc0011.ko \
-    fc0012.ko \
-    fc0013.ko \
-    fc2580.ko \
-    hdmi_dlkm.ko \
-    hid-aksys.ko \
-    it913x.ko \
-    llcc_perfmon.ko \
-    m88rs6000t.ko \
-    machine_dlkm.ko \
-    max2165.ko \
-    mbhc_dlkm.ko \
-    mc44s803.ko \
-    msi001.ko \
-    msm_drm.ko \
-    mt2060.ko \
-    mt2063.ko \
-    mt20xx.ko \
-    mt2131.ko \
-    mt2266.ko \
-    mxl301rf.ko \
-    mxl5005s.ko \
-    mxl5007t.ko \
-    native_dlkm.ko \
-    pinctrl_lpi_dlkm.ko \
-    pinctrl_wcd_dlkm.ko \
-    platform_dlkm.ko \
-    q6_dlkm.ko \
-    q6_notifier_dlkm.ko \
-    q6_pdr_dlkm.ko \
-    qm1d1b0004.ko \
-    qm1d1c0042.ko \
-    qt1010.ko \
-    r820t.ko \
-    radio-i2c-rtc6226-qca.ko \
-    rdbg.ko \
-    rmnet_core.ko \
-    rmnet_ctl.ko \
-    rmnet_offload.ko \
-    rmnet_shs.ko \
-    rx_macro_dlkm.ko \
-    si2157.ko \
-    slimbus.ko \
-    slimbus-ngd.ko \
-    snd_event_dlkm.ko \
-    stub_dlkm.ko \
-    swr_ctrl_dlkm.ko \
-    swr_dlkm.ko \
-    swr_dmic_dlkm.ko \
-    swr_haptics_dlkm.ko \
-    tda18212.ko \
-    tda18218.ko \
-    tda18250.ko \
-    tda9887.ko \
-    tea5761.ko \
-    tea5767.ko \
-    tua9001.ko \
-    tuner-simple.ko \
-    tuner-types.ko \
-    tuner-xc2028.ko \
-    tx_macro_dlkm.ko \
-    va_macro_dlkm.ko \
-    wcd937x_dlkm.ko \
-    wcd937x_slave_dlkm.ko \
-    wcd938x_dlkm.ko \
-    wcd938x_slave_dlkm.ko \
-    wcd9xxx_dlkm.ko \
-    wcd_core_dlkm.ko \
-    wsa883x_dlkm.ko \
-    wsa_macro_dlkm.ko \
-    xc4000.ko \
-    xc5000.ko
-TARGET_MODULE_ALIASES += wlan.ko:qca_cld3_wlan.ko
+BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.load.system_dlkm))
+BOARD_SYSTEM_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.systemdlkm_blocklist.msm.kalama
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(TARGET_KERNEL_SOURCE)/modules.vendor_blocklist.msm.kalama
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.load.vendor_dlkm))
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.load.vendor_ramdisk))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.load.vendor_ramdisk $(COMMON_PATH)/configs/kernel/modules.load.recovery))
+BOOT_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/modules.include.vendor_ramdisk $(COMMON_PATH)/configs/kernel/modules.load.vendor_ramdisk $(COMMON_PATH)/configs/kernel/modules.load.recovery))
+#SYSTEM_KERNEL_MODULES := $(strip $(shell cat $(COMMON_PATH)/configs/kernel/modules.include.system_dlkm))
+
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/qcom/sm8550-modules
+TARGET_KERNEL_EXT_MODULES := \
+    qcom/opensource/mmrm-driver \
+    qcom/opensource/mm-drivers/hw_fence \
+    qcom/opensource/mm-drivers/msm_ext_display \
+    qcom/opensource/mm-drivers/sync_fence \
+    qcom/opensource/audio-kernel \
+    qcom/opensource/camera-kernel \
+    qcom/opensource/dataipa/drivers/platform/msm \
+    qcom/opensource/datarmnet/core \
+    qcom/opensource/datarmnet-ext/aps \
+    qcom/opensource/datarmnet-ext/offload \
+    qcom/opensource/datarmnet-ext/shs \
+    qcom/opensource/datarmnet-ext/perf \
+    qcom/opensource/datarmnet-ext/perf_tether \
+    qcom/opensource/datarmnet-ext/sch \
+    qcom/opensource/datarmnet-ext/wlan \
+    qcom/opensource/securemsm-kernel \
+    qcom/opensource/display-drivers/msm \
+    qcom/opensource/eva-kernel \
+    qcom/opensource/video-driver \
+    qcom/opensource/graphics-kernel \
+    qcom/opensource/wlan/platform \
+    qcom/opensource/wlan/qcacld-3.0/.kiwi_v2 \
+    qcom/opensource/bt-kernel \
+    nxp/opensource/driver
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
