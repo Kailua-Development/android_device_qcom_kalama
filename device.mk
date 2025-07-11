@@ -171,38 +171,37 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Display
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
-
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.common-V1-ndk_platform.vendor \
-    android.hardware.graphics.mapper@3.0-impl-qti-display \
     android.hardware.graphics.mapper@4.0-impl-qti-display \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
+    init.qti.display_boot.rc \
+    init.qti.display_boot.sh \
     libdisplayconfig.qti \
     libdisplayconfig.system.qti \
-    libmemutils \
     libqdMetaData \
     libqdMetaData.system \
     libsdmcore \
     libsdmutils \
-    libtinyxml \
-    lights.qcom \
-    init.qti.display_boot.rc \
-    init.qti.display_boot.sh \
-    memtrack.default \
     vendor.display.config@1.0 \
-    vendor.display.config@1.15.vendor \
+    vendor.display.config@1.11.vendor \
     vendor.display.config@2.0 \
     vendor.display.config@2.0.vendor \
     vendor.qti.hardware.display.allocator-service \
     vendor.qti.hardware.display.composer-service \
     vendor.qti.hardware.display.config-V5-ndk \
+    vendor.qti.hardware.display.config-V1-ndk.vendor \
+    vendor.qti.hardware.display.config-V2-ndk.vendor \
+    vendor.qti.hardware.display.config-V3-ndk.vendor \
+    vendor.qti.hardware.display.config-V4-ndk.vendor \
+    vendor.qti.hardware.display.config-V5-ndk.vendor \
+    vendor.qti.hardware.display.config-V6-ndk.vendor \
+    vendor.qti.hardware.display.demura-service \
     vendor.qti.hardware.display.mapper@1.1.vendor \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
 # DRM
 PRODUCT_PACKAGES += \
