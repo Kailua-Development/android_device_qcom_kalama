@@ -413,9 +413,9 @@ PRODUCT_PACKAGES += \
     CarrierConfigResCommon \
     FrameworksResCommon \
     FrameworksResTarget \
-    LahainaFrameworks \
-    LahainaSettings \
-    LahainaSystemUI \
+    KalamaFrameworks \
+    KalamaSettings \
+    KalamaSystemUI \
     SystemUIResCommon \
     TelephonyResCommon \
     WifiResCommon \
