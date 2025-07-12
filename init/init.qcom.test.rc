@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018,2020-2021 The Linux Foundation. All rights reserved.
+# Copyright (c) 2016, 2018, 2020, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,16 +25,43 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-on init
-    write /sys/class/backlight/panel0-backlight/brightness 200
-    setprop sys.usb.configfs 1
+on early-init
+    write /proc/sys/kernel/kptr_restrict 0
 
-on property:ro.boot.usbcontroller=*
-    setprop sys.usb.controller ${ro.boot.usbcontroller}
-    wait /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode
-    write /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode peripheral
-    wait /sys/class/udc/${ro.boot.usbcontroller} 1
+# this will make sure you have /data ready and then you try to create the dir.
+on post-fs-data
+    # Create directory for Graphics applications
+    mkdir /data/vendor/gpu 0777 system system
+    # Create directory for SCVE applications
+    mkdir /data/vendor/scve 0777 system system
 
-on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+# Coresight early boot service
+service cs-early-boot /vendor/bin/sh /vendor/bin/init.qcom.debug.sh
+    class core
+    user root
+    oneshot
+    seclabel u:r:qti-testscripts:s0
+
+on property:sys.boot_completed=1
+    start cs-post-boot
+
+on property:sys.vendor.dbg.coresight.enable=1
+    write /mnt/vendor/persist/coresight/enable 1
+
+on property:sys.vendor.dbg.coresight.enable=0
+    write /mnt/vendor/persist/coresight/enable 0
+
+#Debug App FDA
+on property:vendor.fda.property=*
+    exec_background u:r:vendor-qti-testscripts:s0 -- /vendor/bin/sh /vendor/bin/init.fda.script.sh
+
+service DiagDaemon /system/vendor/bin/diag_socket_log -f /sdcard/ipaddress.txt
+    class late_start
+    oneshot
+    disabled
+    user root
+    group root system log diag net_raw
+
+# crash dump trigger from audio subsystem
+on property:vendor.audio.crash.trigger=1
+    exec u:r:vendor-qti-testscripts:s0 -- /vendor/bin/sh /vendor/bin/init.qti.audio.debug.sh

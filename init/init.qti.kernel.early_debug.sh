@@ -1,4 +1,9 @@
-# Copyright (c) 2017-2018,2020-2021 The Linux Foundation. All rights reserved.
+#=============================================================================
+# Copyright (c) 2022 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+# Copyright (c) 2014-2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -23,18 +28,18 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+#=============================================================================
 
-on init
-    write /sys/class/backlight/panel0-backlight/brightness 200
-    setprop sys.usb.configfs 1
+if [ -f /sys/devices/soc0/soc_id ]; then
+	platformid=`cat /sys/devices/soc0/soc_id`
+fi
 
-on property:ro.boot.usbcontroller=*
-    setprop sys.usb.controller ${ro.boot.usbcontroller}
-    wait /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode
-    write /sys/bus/platform/devices/${ro.boot.usb.dwc3_msm:-a600000.ssusb}/mode peripheral
-    wait /sys/class/udc/${ro.boot.usbcontroller} 1
+case "$platformid" in
+    "519"|"536"|"600"|"601"|"603"|"604"|"668")
+		/vendor/bin/sh /vendor/bin/init.qti.kernel.early_debug-kalama.sh
+		;;
 
-on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+	*)
+		echo "***WARNING***: Invalid SoC ID\n\t Not running early debug scripts!!\n"
+		;;
+esac
