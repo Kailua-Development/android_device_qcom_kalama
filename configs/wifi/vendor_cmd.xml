@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 # Copyright (c) 2020, The Linux Foundation. All rights reserved.
+# Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
 
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -388,6 +389,19 @@
 		<Attribute name="CONFIG_TX_STBC" ID="68" TYPE="u8"/>
 		<Attribute name="CONFIG_RX_STBC" ID="69" TYPE="u8"/>
 		<Attribute name="CONFIG_NSS" ID="70" TYPE="u8"/>
+		<Attribute name="CONFIG_OPTIMIZED_POWER_MANAGEMENT" ID="71" TYPE="u8"/>
+		<Attribute name="CONFIG_UDP_QOS_UPGRADE" ID="72" TYPE="u8"/>
+		<Attribute name="CONFIG_NUM_TX_CHAINS" ID="73" TYPE="u8"/>
+		<Attribute name="CONFIG_NUM_RX_CHAINS" ID="74" TYPE="u8"/>
+		<Attribute name="CONFIG_ANI_SETTING" ID="75" TYPE="u8"/>
+		<Attribute name="CONFIG_ANI_LEVEL" ID="76" TYPE="u32"/>
+		<Attribute name="CONFIG_TX_NSS" ID="77" TYPE="u8"/>
+		<Attribute name="CONFIG_RX_NSS" ID="78" TYPE="u8"/>
+		<Attribute name="CONFIG_CONCURRENT_STA_PRIMARY" ID="79" TYPE="u8"/>
+		<Attribute name="CONFIG_FT_OVER_DS" ID="80" TYPE="u8"/>
+		<Attribute name="CONFIG_ARP_NS_OFFLOAD" ID="81" TYPE="u8"/>
+		<Attribute name="CONFIG_AUDIO_DATA_PATH" ID="82" TYPE="u8"/>
+		<Attribute name="CONFIG_DBAM" ID="83" TYPE="u8"/>
 	</VendorCmd>
 	<!-- QCA_NL80211_VENDOR_SUBCMD_GET_WIFI_CONFIGURATION = 75 -->
 	<VendorCmd name="GET_WIFI_CONFIG" ID="75">
@@ -964,4 +978,18 @@
 	<!-- QCA_NL80211_VENDOR_SUBCMD_UPDATE_SSID = 194 -->
 	<!-- QCA_NL80211_VENDOR_SUBCMD_WIFI_FW_STATS = 195 -->
 	<!-- QCA_NL80211_VENDOR_SUBCMD_MBSSID_TX_VDEV_STATUS = 196 -->
+	<!-- QCA_NL80211_VENDOR_SUBCMD_CONCURRENT_MULTI_STA_POLICY = 197 -->
+	<!-- QCA_NL80211_VENDOR_SUBCMD_USABLE_CHANNELS = 198 -->
+	<!-- QCA_NL80211_VENDOR_SUBCMD_GET_RADAR_HISTORY = 199 -->
+	<!-- QCA_NL80211_VENDOR_SUBCMD_MDNS_OFFLOAD = 200 -->
+	<VendorCmd name="MDNS_OFFLOAD" ID="200">
+		<Attribute name="MDNS_OFFLOAD_ENABLE" ID="1" TYPE="FLAG"/>
+		<Attribute name="MDNS_TABLE" ID="2" TYPE="NESTED" ATTR_MAX="1">
+			<Attribute name="MDNS_ENTRY" ID="3" TYPE="NESTED" ATTR_MAX="3">
+				<Attribute name="MDNS_OFFLOAD_FQDN" ID="4" TYPE="string"/>
+				<Attribute name="MDNS_OFFLOAD_ANSWER_RESOURCE_RECORDS_COUNT" ID="5" TYPE="u16"/>
+				<Attribute name="MDNS_OFFLOAD_ANSWER_PAYLOAD" ID="6" TYPE="blob"/>
+			</Attribute>
+		</Attribute>
+	</VendorCmd>
 </WCN_VenTool>
