@@ -7,6 +7,7 @@
 BOARD_VENDOR := qcom
 
 DEVICE_PATH := device/qcom/kalama
+COMMON_PATH := $(DEVICE_PATH)
 
 # A/B
 AB_OTA_UPDATER := true
