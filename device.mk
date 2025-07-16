@@ -223,11 +223,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml
 
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@2.1-impl-qti \
-    android.hardware.gnss@2.1-service-qti \
     libbatching \
     libgeofencing \
     libgnss
+#    android.hardware.gnss@2.1-impl-qti \
+    android.hardware.gnss@2.1-service-qti 
 
 PRODUCT_PACKAGES += \
     apdr.conf \
@@ -266,26 +266,22 @@ PRODUCT_PACKAGES += \
     libhwbinder.vendor
 
 # Init
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/init/fstab.default:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.default
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/init/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.default
 
 PRODUCT_PACKAGES += \
-    charger_fw_fstab.qti \
-    fstab.default \
-    fstab.zram \
+    fstab.qcom \
     init.class_main.sh \
-    init.kernel.post_boot-lahaina.sh \
-    init.kernel.post_boot-shima.sh \
-    init.kernel.post_boot-yupik.sh \
-    init.lahaina.perf.rc \
+    init.kernel.post_boot-kalama.sh \
+    init.kernel.post_boot-kalama_3_2_1.sh \
+    init.kernel.post_boot-kalama_3_4_0.sh \
+    init.kernel.post_boot-kalama_default_3_4_1.sh \
+    init.kernel.post_boot.sh \
     init.qcom.early_boot.sh \
     init.qcom.rc \
     init.qcom.sh \
     init.qti.kernel.rc \
     init.recovery.qcom.rc \
-    init.target.rc \
-    ueventd-odm.rc \
-    ueventd.qcom.rc
-
+    init.target.rc 
 # IPACM
 PRODUCT_PACKAGES += \
     ipacm \
@@ -350,13 +346,13 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libOmxAacEnc \
+    libstagefrighthw
+#    libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxG711Enc \
     libOmxQcelp13Enc \
-    libstagefrighthw
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -528,7 +524,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/kiwi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/kiwi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/configs/wifi/kiwi_v2/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini \
-    $(LOCAL_PATH)/configs/wifi/qca6490/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/qca6490/WCNSS_qcom_cfg.ini
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
@@ -541,7 +536,6 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
     android.hardware.wifi.supplicant-V1-ndk.vendor \
     hostapd \
-    libqsap_sdk \
     libwpa_client \
     libwifi-hal-ctrl \
     libwifi-hal-qcom \
@@ -563,11 +557,11 @@ PRODUCT_BOOT_JARS += \
     WfdCommon
 
 # WiFi firmware symlinks
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     firmware_wlanmdsp.otaupdate_symlink \
     firmware_wlan_mac.bin_symlink \
     firmware_WCNSS_qcom_cfg.ini_symlink \
-    firmware_WCNSS_qcom_cfg.ini_qca6490_symlink
+
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/qcom/kalama/kalama-vendor.mk)
