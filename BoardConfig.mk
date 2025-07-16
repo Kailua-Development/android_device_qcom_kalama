@@ -28,8 +28,6 @@ AB_OTA_PARTITIONS += \
     vendor_boot \
     vendor_dlkm
 
-#Dup Files Bypass
-BUILD_BROKEN_DUP_RULES := true
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
 
